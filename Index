@@ -1,0 +1,31 @@
+const readline = require('readline-sync');
+
+console.log("🤖 ¡Hola! Soy tu chatbot de IA simple. Escribe 'salir' para terminar.\n");
+
+const respuestas = [
+  { palabras: ["hola", "buenas"], respuesta: "¡Hola! ¿En qué puedo ayudarte?" },
+  { palabras: ["nombre"], respuesta: "Me llamo IA Simple, tu asistente virtual." },
+  { palabras: ["adios", "despedida"], respuesta: "¡Hasta pronto! 👋" },
+  { palabras: ["clima", "tiempo"], respuesta: "No puedo ver el clima aún, ¡pero puedo conversar contigo!" },
+  { palabras: ["ayuda"], respuesta: "Puedes preguntarme sobre mi nombre, saludar, o decir adiós." }
+];
+
+function obtenerRespuesta(mensaje) {
+  mensaje = mensaje.toLowerCase();
+  for (const item of respuestas) {
+    if (item.palabras.some(palabra => mensaje.includes(palabra))) {
+      return item.respuesta;
+    }
+  }
+  return "No entendí eso, ¡pero sigo aprendiendo! 😊";
+}
+
+while (true) {
+  const entrada = readline.question("> ");
+  if (entrada.toLowerCase() === "salir") {
+    console.log("¡Hasta luego!");
+    break;
+  }
+  const respuesta = obtenerRespuesta(entrada);
+  console.log(respuesta);
+}
